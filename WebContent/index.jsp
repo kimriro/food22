@@ -16,42 +16,9 @@
 
 <div class="container">
   <h2>맛집 리스트</h2>
-  <form action="sumbit.jsp">
-    <div class="form-group">
-      <label for="name">가게이름</label>
-      <input type="text" class="form-control" id="name" placeholder="가게이름 입력" name="name">
-    </div>
-    <div class="form-group">
-      <label for="menu">메뉴</label>
-      <input type="text" class="form-control" id="menu" placeholder="메뉴 입력" name="menu">
-    </div>
-    <div class="form-group">
-      <label for="home">원산지</label>
-      <input type="text" class="form-control" id="home" placeholder="원산지 입력" name="home">
-    </div>
-    <div class="form-group">
-      <label for="price">가격</label>
-      <input type="text" class="form-control" id="price" placeholder="가격 입력" name="price">
-    </div>
-    <div class="form-group">
-      <label for="loc">위치</label>
-      <input type="loc" class="form-control" id="loc" placeholder="위치 입력" name="loc">
-    </div>
-    <div class="form-group">
-      <label for="star">별점</label>
-      <input type="text" class="form-control" id="star" placeholder="별점 입력" name="star">
-    </div>
-    <div class="form-group">
-      <label for="tel">전화번호</label>
-      <input type="number" class="form-control" id="tel" placeholder="전화번호 입력" name="tel">
-    </div>
-    <div class="form-group">
-      <label for="time">영업 시간</label>
-      <input type="time" class="form-control" id="time" placeholder="영업시간 입력" name="time">
-    </div>
-   
-    <button type="submit" class="btn btn-primary">맛집 찾으러 가기</button>
-  </form>
+  
+  <button type="button" class="btn btn-info" onclick="location.href= 'insert.jsp'">맛집 데이터 입력</button>
+  <button type="button" class="btn btn-success" onclick="location.href= 'print.jsp'">맛집 데이터 출력</button>
 </div>
 
 </body>
