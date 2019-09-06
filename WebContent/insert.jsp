@@ -13,6 +13,8 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>
+<jsp:include page="top.jsp" flush="false"/>
+
 
 <div class="container">
   <h2>맛집 리스트</h2>

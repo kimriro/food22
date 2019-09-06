@@ -2,9 +2,8 @@
     pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
-<html>
 <head>
-  <title>맛집</title>
+  <title>태풍</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -14,12 +13,29 @@
 </head>
 <body>
 
-<div class="container">
-  <h2>맛집 리스트</h2>
-  
-  <button type="button" class="btn btn-info" onclick="location.href= 'insert.jsp'">맛집 데이터 입력</button>
-  <button type="button" class="btn btn-success" onclick="location.href= 'print.jsp'">맛집 데이터 출력</button>
-</div>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" href="insert.jsp">태풍 추가</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="print.jsp">태풍 맛집</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="fa.jsp">태풍 추천</a>
+    </li>
+  </ul>
+  <form class="form-inline" action="/action_page.php">
+    <input class="form-control mr-sm-2" type="text" placeholder="Search">
+    <button class="btn btn-success" type="submit">Search</button>
+  </form>
+</nav>
+<br>
 
+<div class="container-fluid">
+  <h3>오늘 태풍</h3>
+  <p>오늘 태풍 온다</p>
+  <img src = "https://image.ytn.co.kr/general/jpg/2019/0906/201909060849301294_t.jpg">
+  </div>
 </body>
 </html>
