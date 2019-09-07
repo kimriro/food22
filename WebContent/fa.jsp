@@ -1,3 +1,4 @@
+<%@page import="java.util.Random"%>
 <%@page import="java.util.ArrayList"%>			
 <%@page import="food22.FOODVO"%>			
 <%@page import="java.sql.ResultSet"%>			
@@ -10,7 +11,7 @@
 pageEncoding="UTF-8"%>			
 			
 <%			
-			String ob = request.getParameter("orderby");
+			
 //위 데이터를 데이터 베이스에 넣기			
 Connection conn = null;			
 Boolean connect = false;			
@@ -22,16 +23,7 @@ try {
 	DataSource ds = (DataSource)init.lookup("java:comp/env/jdbc/kndb");		
 	conn = ds.getConnection();		
 			
-	String sql = null;
-	
-	
-	if(ob == null){
-		sql = "SELECT * FROM food ORDER BY price DESC";
- 
-	}else{
-		sql = "SELECT * FROM food ORDER BY price asc";
-	}
-
+	String sql = "select * from food";		
 	PreparedStatement pstmt = conn.prepareStatement(sql);		
 	ResultSet rs = pstmt.executeQuery();		
 			
@@ -60,8 +52,17 @@ if (connect == true) {
 } else {			
 	System.out.println("연결실패.");		
 }			
-			
-%>			
+Random rnd = new Random();
+int rNum = rnd.nextInt(10);
+System.out.println("list 총 갯수: " + list.size());
+System.out.println("랜덤 값:" + rNum);
+
+FOODVO vo = list.get(rNum);
+System.out.println(vo.getMenu());
+
+
+//ArrayList<String> sList = new ArrayList<>();
+%>		
 			
 <!DOCTYPE html>			
 <html>			
@@ -85,12 +86,8 @@ if (connect == true) {
 <tr>			
 <th>가게이름</th>			
 <th>메뉴</th>			
-<th>원산지</th>
-<% if(ob==null){%>			
-<th>가격 <a href="print.jsp?orderby=1">↑</a></th>
-<% } else{%>
-	<th>가격 <a href="print.jsp">↓</a></th>
-	<% }%>		
+<th>원산지</th>			
+<th>가격</th>			
 <th>위치</th>			
 <th>별점</th>			
 <th>전화번호</th>			
@@ -98,7 +95,7 @@ if (connect == true) {
 </tr>			
 </thead>			
 <tbody>			
-<%for (FOODVO vo : list) { %>			
+			
 <tr class="table-dark text-dark">			
 <td><%=vo.getName() %></td>			
 <td><%=vo.getMenu() %></td>			
@@ -109,7 +106,7 @@ if (connect == true) {
 <td><%=vo.getTel() %></td>			
 <td><%=vo.getTime() %></td>			
 </tr>			
-	<% } %>		
+		
 </tbody>			
 </table>			
 </div>			
