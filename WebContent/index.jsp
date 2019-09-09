@@ -25,6 +25,9 @@
     <li class="nav-item">
       <a class="nav-link" href="fa.jsp">태풍 추천</a>
     </li>
+      <li class="nav-item">
+      <a class="nav-link" href="star.jsp">별점 평가 </a>
+    </li>
   </ul>
   <form class="form-inline ml-auto" action="search.jsp">
     <input class="form-control mr-sm-2" type="text" name="search" placeholder="Search">

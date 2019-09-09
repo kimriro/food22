@@ -73,6 +73,18 @@ if (connect == true) {
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>			
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>			
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>			
+<script>			
+$(document).ready(function(){	
+	$('#menuname').click(function(){		
+    
+		alert($(this).text());
+	});
+});			
+
+function getMenuName(name){
+	alert(name);
+}
+</script>
 </head>			
 <body>			
 		<jsp:include page="top.jsp" flush="false"/>
@@ -101,7 +113,7 @@ if (connect == true) {
 <%for (FOODVO vo : list) { %>			
 <tr class="table-dark text-dark">			
 <td><%=vo.getName() %></td>			
-<td><%=vo.getMenu() %></td>			
+<td><a href="#" onclick="getMenuName('<%=vo.getMenu()%>')"><%=vo.getMenu() %> </a></td>			
 <td><%=vo.getHome() %> </td>			
 <td><%=vo.getPrice() %></td>			
 <td><%=vo.getLoc() %></td>			
