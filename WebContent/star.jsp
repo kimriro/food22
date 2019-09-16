@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
@@ -67,13 +68,14 @@ $(document).ready(function(){
         <!-- Modal Header -->
         <div class="modal-header">
           <h4 class="modal-title">별점 평가</h4>
-          <button type="button" class="close" data-dismiss="modal">×</button>
+         
         </div>
         
         <!-- Modal body -->
         <div class="modal-body">
          
-         <div class="starRev">			
+         <div class="starRev">	
+         <p id="m_menuname"></p>		
 <span class="starR on">1</span>			
 <span class="starR">2</span>			
 <span class="starR">3</span>			

@@ -1,3 +1,4 @@
+<%@page import="food22.STOREVO"%>
 <%@page import="java.util.ArrayList"%>							
 <%@page import="food22.FOODVO"%>							
 <%@page import="java.sql.ResultSet"%>							
@@ -17,7 +18,7 @@
 	Connection conn = null;						
 	Boolean connect = false;						
 							
-	ArrayList<FOODVO> list = new ArrayList<>();						
+	ArrayList<STOREVO> list = new ArrayList<>();						
 							
 	try {						
 		Context init = new InitialContext();					
@@ -29,23 +30,19 @@
 		if (ob == null) {					
 			//오름차순				
 							
-			sql = "SELECT * FROM food  ORDER BY price desc ";				
+			sql = "SELECT * FROM store  ORDER BY name desc ";				
 							
 		} else {					
 			//내림차순				
-			sql = "SELECT * FROM food  ORDER BY price asc ";				
+			sql = "SELECT * FROM store  ORDER BY name asc ";				
 		}					
 		PreparedStatement pstmt = conn.prepareStatement(sql);					
 		ResultSet rs = pstmt.executeQuery();					
 							
 		while (rs.next()) {					
-			FOODVO vo = new FOODVO();				
-			vo.setName(rs.getString("name"));				
-			vo.setMenu(rs.getString("menu"));				
-			vo.setHome(rs.getString("home"));				
-			vo.setPrice(rs.getString("price"));				
-			vo.setLoc(rs.getString("loc"));				
-			vo.setStar(rs.getString("star"));				
+			STOREVO vo = new STOREVO();				
+			vo.setName(rs.getString("name"));							
+			vo.setLoc(rs.getString("loc"));								
 			vo.setTel(rs.getString("tel"));				
 			vo.setTime(rs.getString("time"));				
 			list.add(vo);				
@@ -139,29 +136,23 @@ $(document).ready(function(){
 <table class="table">			
 <thead>			
 <tr>			
-<th>가게이름</th>			
-<th>메뉴</th>			
-<th>원산지</th>
 <% if(ob==null){%>			
-<th>가격 <a href="print.jsp?orderby=1">↑</a></th>
+<th>가게이름<a href="p2.jsp?orderby=1">↑</a></th>
 <% } else{%>
-	<th>가격 <a href="print.jsp">↓</a></th>
+	<th>가게이름 <a href="p2.jsp">↓</a></th>
 	<% }%>		
 <th>위치</th>			
-<th>별점</th>			
+		
 <th>전화번호</th>			
 <th>영업시간</th>			
 </tr>			
 </thead>			
 <tbody>			
-<%for (FOODVO vo : list) { %>			
+<%for (STOREVO vo : list) { %>			
 <tr class="table-dark text-dark">			
-<td><%=vo.getName() %></td>			
-<td><a href="#" onclick="getMenuName('<%=vo.getMenu()%>')"><%=vo.getMenu() %> </a></td>			
-<td><%=vo.getHome() %> </td>			
-<td><%=vo.getPrice() %></td>			
+<td><%=vo.getName() %></td>						
 <td><%=vo.getLoc() %></td>			
-<td><%=vo.getStar() %></td>			
+			
 <td><%=vo.getTel() %></td>			
 <td><%=vo.getTime() %></td>			
 </tr>			
@@ -205,4 +196,4 @@ $(document).ready(function(){
 <!-- 모달 끝-->							
 							
 </body>							
-</html>								
+</html>		

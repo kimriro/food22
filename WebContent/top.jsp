@@ -12,10 +12,10 @@
   <a class="navbar-brand" href="index.jsp">태풍</a>
   <ul class="navbar-nav">
     <li class="nav-item">
-      <a class="nav-link" href="insert.jsp">태풍 추가</a>
+      <a class="nav-link" href="store.jsp">태풍 추가</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="print.jsp">태풍 맛집</a>
+      <a class="nav-link" href="p2.jsp">태풍 맛집</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="fa.jsp">태풍 추천</a>
