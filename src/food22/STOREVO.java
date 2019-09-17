@@ -2,7 +2,7 @@ package food22;
 
 public class STOREVO {
 
-	
+	private int id;
 	private String name;
 	private String loc;
 	private String tel;
@@ -30,6 +30,12 @@ public class STOREVO {
 	}
 	public void setTime(String time) {
 		this.time = time;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 
