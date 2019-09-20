@@ -153,7 +153,7 @@ $(document).ready(function(){
 <tbody>			
 <%for (STOREVO vo : list) { %>			
 <tr class="table-dark text-dark">			
-<td><a href="menu.jsp?s_id=<%=vo.getId() %>"><%=vo.getName() %></a></td>						
+<td><a href="menu.jsp?s_id=<%=vo.getId() %>&s_name=<%=vo.getName() %>"><%=vo.getName() %></a></td>						
 <td><%=vo.getLoc() %></td>			
 			
 <td><%=vo.getTel() %></td>			

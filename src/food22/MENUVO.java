@@ -6,6 +6,7 @@ public class MENUVO {
 	private int id;
 	private String name;
 	private String price;
+	private String img;
 	private int s_id;
 	public int getId() {
 		return id;
@@ -30,6 +31,12 @@ public class MENUVO {
 	}
 	public void setS_id(int s_id) {
 		this.s_id = s_id;
+	}
+	public String getImg() {
+		return img;
+	}
+	public void setImg(String img) {
+		this.img = img;
 	}
 	
 	

@@ -75,12 +75,12 @@ $(document).ready(function(){
         <div class="modal-body">
          
          <div class="starRev">	
-         <p id="m_menuname"></p>		
+         		
 <span class="starR on">1</span>			
-<span class="starR">2</span>			
-<span class="starR">3</span>			
-<span class="starR">4</span>			
-<span class="starR">5</span>			
+<span class="starR on">2</span>			
+<span class="starR on">3</span>			
+<span class="starR on">4</span>			
+<span class="starR on">5</span>			
 </div>	
         </div>
         
