@@ -25,22 +25,35 @@
             <div class="title">
                 <h1>회원가입</h1>
             </div>
-            <div class="content form-horizontal align-items-center">
-               
-                <form action="Login_proc.jsp" method="post" >
-                    <div class="form-group">
-                        <label for="username" class="control-label">아이디</label><br>
-                        <input type="text" id="username" name="username" class="form-control"/><br>
-
-                        <label for="password" class="control-label">비밀번호</label><br>
-                        <input type="password" id="password" name="password" class="form-control"/><br>
-                    </div>
-                    <div class="form-group">
-                        <input type="submit" value="로그인" class="btn btn-primary btn-block">
-                    </div>
-                </form>
-                </div>
-            </div>
-        
-    </body>
-</html>
+            											
+	<form action="join_proc.jsp" method="post" >										
+	<div class="form-group">										
+	<label for="email" class="control-label">이메일</label>										
+	<input type="text" id="email" name="email" class="form-control"/>										
+											
+	<label for="password" class="control-label">비밀번호</label>										
+	<input type="password" id="password" name="password" class="form-control"/>										
+											
+						<label for="name" class="control-label">이름</label>					
+	<input type="text" id="name" name="name" class="form-control"/>										
+											
+	<label for="phone" class="control-label">전화번호</label>										
+	<input type="text" id="phone" name="phone" class="form-control"/>										
+	</div>										
+											
+	<div class="form-group">										
+			<div class="custom-control custom-radio custom-control-inline">								
+						<input type="radio" class="custom-control-input" id="customRadio1" name="radio" checked="checked">					
+						<label class="custom-control-label" for="customRadio1">개인</label>					
+						</div>					
+							<div class="custom-control custom-radio custom-control-inline">				
+							<input type="radio" class="custom-control-input" id="customRadio2" name="radio">				
+							<label class="custom-control-label" for="customRadio2">사업자</label>				
+							</div>				
+						</div>					
+										
+	<div class="form-group">										
+	<input type="submit" value="회원가입" class="btn btn-primary btn-block">										
+	</div>										
+	</form>										
+            

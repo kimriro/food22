@@ -9,6 +9,9 @@
 	request.setCharacterEncoding("utf-8"); //
 	String email = request.getParameter("email");
 	String password = request.getParameter("password");
+	String name = request.getParameter("name");
+	String phone = request.getParameter("phone");
+	String radio = request.getParameter("radio");
 	
 // 	out.println(menu + " 에 " + "별점 " + star + " 점을 줬다.");
 	
@@ -21,10 +24,13 @@
 		DataSource ds = (DataSource)init.lookup("java:comp/env/jdbc/kndb");
 		conn = ds.getConnection();
 		
-		String sql = "INSERT INTO star (score, m_id) VALUES (?, (SELECT id FROM menu WHERE NAME = ?));";
+		String sql = "INSERT INTO users (email, password, name ,phone, radio) VALUES (?,?,?,?,? ;";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, email);
 		pstmt.setString(2, password);
+		pstmt.setString(3, name);
+		pstmt.setString(4, phone);
+		pstmt.setString(5, radio);
 		pstmt.executeUpdate();
 		
 		connect = true;

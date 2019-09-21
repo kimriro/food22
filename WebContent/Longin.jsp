@@ -35,12 +35,6 @@
                         <label for="password" class="control-label">비밀번호</label><br>
                         <input type="password" id="password" name="password" class="form-control"/><br>
                    
-                   <label for="name" class="control-label">이름</label><br>
-                        <input type="text" id="name" name="name" class="form-control"/><br>
-                   
-                   <label for="phone" class="control-label">전화번호</label><br>
-                        <input type="text" id="phone" name="phone" class="form-control"/>
-                   
                
                     </div>
                     <div class="form-group">
