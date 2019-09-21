@@ -7,8 +7,8 @@
     pageEncoding="UTF-8"%>
 <%
 	request.setCharacterEncoding("utf-8"); //
-	String menu = request.getParameter("menu");
-	String star = request.getParameter("star");
+	String email = request.getParameter("email");
+	String password = request.getParameter("password");
 	
 // 	out.println(menu + " 에 " + "별점 " + star + " 점을 줬다.");
 	
@@ -23,8 +23,8 @@
 		
 		String sql = "INSERT INTO star (score, m_id) VALUES (?, (SELECT id FROM menu WHERE NAME = ?));";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, star);
-		pstmt.setString(2, menu);
+		pstmt.setString(1, email);
+		pstmt.setString(2, password);
 		pstmt.executeUpdate();
 		
 		connect = true;

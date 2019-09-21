@@ -37,6 +37,7 @@ try {
 		vo.setId(rs.getInt("id"));
 		vo.setName(rs.getString("name"));
 		vo.setPrice(rs.getString("price"));
+		vo.setStar_avg(rs.getString("star_avg"));
 		list.add(vo);
 	}
 	
@@ -162,8 +163,7 @@ function modalClose() {
       <tr class="table-dark text-dark">
         <td id="m_menuname"><a href="menu2.jsp?m_name=<%=vo.getName() %>"><%=vo.getName() %></a></td>
         <td><%=vo.getPrice() %></td>
- 
-<td>4.5</td>
+        <td><%=vo.getStar_avg() %></td>
       </tr>      
   	<% } %>
     </tbody>

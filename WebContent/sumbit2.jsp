@@ -1,15 +1,17 @@
-<%@page import="java.sql.Connection"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="javax.sql.DataSource"%>
 <%@page import="javax.naming.InitialContext"%>
 <%@page import="javax.naming.Context"%>
+<%@page import="java.sql.Connection"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<% 
+<%
+request.setCharacterEncoding("utf-8");   // 한글 처리
 String name = request.getParameter("name");	
 String loc = request.getParameter("loc");	
 String tel = request.getParameter("tel");	
 String time = request.getParameter("time");	
+// 위 데이터를 데이터 베이스에 넣기
 Connection conn = null;			
 Boolean connect = false;
 	
@@ -18,7 +20,7 @@ try {
 	DataSource ds = (DataSource)init.lookup("java:comp/env/jdbc/kndb");
 	conn = ds.getConnection();
 	
-	String sql = "INSERT INTO store (name, loc, tel, time) VALUES ( ?, ?, ?, ?)";
+	String sql = "INSERT INTO store (name, loc, tel, time) VALUES (?, ?, ?, ?)";
 	PreparedStatement pstmt = conn.prepareStatement(sql);
 	pstmt.setString(1, name);
 	pstmt.setString(2, loc);
@@ -48,7 +50,7 @@ if (connect == true) {
 </head>
 <body>
 <script>
-location.href= "p2.jsp";
+location.href="p2.jsp";
 </script>
 </body>
 </html>

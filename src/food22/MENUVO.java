@@ -7,6 +7,7 @@ public class MENUVO {
 	private String name;
 	private String price;
 	private String img;
+	private String star_avg;
 	private int s_id;
 	public int getId() {
 		return id;
@@ -37,6 +38,12 @@ public class MENUVO {
 	}
 	public void setImg(String img) {
 		this.img = img;
+	}
+	public String getStar_avg() {
+		return star_avg;
+	}
+	public void setStar_avg(String star_avg) {
+		this.star_avg = star_avg;
 	}
 	
 	

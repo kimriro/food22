@@ -1,3 +1,4 @@
+<%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="javax.naming.InitialContext"%>
 <%@page import="javax.sql.DataSource"%>
@@ -7,8 +8,8 @@
     pageEncoding="UTF-8"%>
 <%
 	request.setCharacterEncoding("utf-8"); //
-	String menu = request.getParameter("menu");
-	String star = request.getParameter("star");
+	String email = request.getParameter("email");
+	String password = request.getParameter("password");
 	
 // 	out.println(menu + " 에 " + "별점 " + star + " 점을 줬다.");
 	
@@ -21,12 +22,21 @@
 		DataSource ds = (DataSource)init.lookup("java:comp/env/jdbc/kndb");
 		conn = ds.getConnection();
 		
-		String sql = "INSERT INTO star (score, m_id) VALUES (?, (SELECT id FROM menu WHERE NAME = ?));";
+		String sql = "SELECT * FROM users WHERE email= ? AND pw= ?;";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, star);
-		pstmt.setString(2, menu);
-		pstmt.executeUpdate();
+		pstmt.setString(1, email);
+		pstmt.setString(2, password);
+		ResultSet rs = pstmt.executeQuery();
 		
+		out.println("<script>");
+		if(rs.next()){
+		
+			String name= rs.getString("name");
+			out.println("alert('" +name+ " 님 반가워');");	
+		}else{
+			out.println("alert('제대로 입력 했는지 확인 하세요!!');");
+		}
+		out.println("</script>");
 		connect = true;
 		conn.close();
 	} catch (Exception e) {	
@@ -36,10 +46,10 @@
 		
 	if (connect == true) {	
 		System.out.println("연결되었습니다.");
-		out.println(1);
+	//	out.println(1);
 	} else {	
 		System.out.println("연결실패.");
-		out.println(0);
+	//	out.println(0);
 	}	
     
 %>

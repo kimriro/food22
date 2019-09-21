@@ -26,7 +26,7 @@
       <a class="nav-link" href="fa.jsp">태풍 추천</a>
     </li>
       <li class="nav-item">
-      <a class="nav-link" href="star.jsp">별점 평가 </a>
+      <a class="nav-link" href="Longin.jsp">로그인 </a>
     </li>
   </ul>
   <form class="form-inline ml-auto" action="search.jsp">
@@ -37,9 +37,8 @@
 <br>
 
 <div class="container-fluid">
-  <h3>오늘 태풍</h3>
-  <p>오늘 태풍 온다</p>
-  <img src = "https://image.ytn.co.kr/general/jpg/2019/0906/201909060849301294_t.jpg">
+  <p>태풍을 추천 드려요.</p>
+  <img src="http://www.yongwoodong.co.kr/bbs/data/menu/1205779287.jpg">
   </div>
 </body>
 </html>
