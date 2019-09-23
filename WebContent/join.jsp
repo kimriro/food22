@@ -43,11 +43,11 @@
 											
 	<div class="form-group">										
 			<div class="custom-control custom-radio custom-control-inline">								
-						<input type="radio" class="custom-control-input" id="customRadio1" name="radio" checked="checked">					
+						<input type="radio" class="custom-control-input" id="customRadio1" name="radio" value="0" checked="checked">					
 						<label class="custom-control-label" for="customRadio1">개인</label>					
 						</div>					
 							<div class="custom-control custom-radio custom-control-inline">				
-							<input type="radio" class="custom-control-input" id="customRadio2" name="radio">				
+							<input type="radio" class="custom-control-input" id="customRadio2" name="radio" value="10">				
 							<label class="custom-control-label" for="customRadio2">사업자</label>				
 							</div>				
 						</div>					

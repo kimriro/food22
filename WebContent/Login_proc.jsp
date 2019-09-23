@@ -30,9 +30,10 @@
 		
 		out.println("<script>");
 		if(rs.next()){
-		
+			session.setAttribute("email", email);
 			String name= rs.getString("name");
 			out.println("alert('" +name+ " 님 반가워');");	
+			out.println("location.href='index.jsp'");
 		}else{
 			out.println("alert('제대로 입력 했는지 확인 하세요!!');");
 		}

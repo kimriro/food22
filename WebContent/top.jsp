@@ -1,5 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    <% 
+    // 세션 체크 (불러오기)
+   String email = (String)session.getAttribute("email");
+    System.out.println(email);
+    
+    if(email !=null){
+    	System.out.println("여기 있어요");
+    	
+    }else{
+    	System.out.println("여기 없어요");
+    }
+    %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,19 +28,33 @@
 
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
   <!-- Brand/logo -->
-  <a class="navbar-brand" href="index.jsp">태풍</a>
-  <ul class="navbar-nav">
-    <li class="nav-item">
-      <a class="nav-link" href="store.jsp">태풍 추가</a>
+  <a class="navbar-brand" href="index.jsp">맛집</a>
+
+<ul class="navbar-nav">
+
+<li class="nav-item">
+  <% if(email!=null){%>
+      <a class="nav-link" href="store.jsp">맛집 추가</a>
+      <%} %>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="p2.jsp">태풍 맛집</a>
+      <a class="nav-link" href="p2.jsp">전체 맛집</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="fa.jsp">태풍 추천</a>
+    <% if(email!=null){%>
+ <a class="nav-link" href="fa.jsp">맛집 추천</a>      
+      <%} else{ %>
+      <a class="nav-link" href="Longin.jsp">맛집 추천</a>
+      <%} %>
+      
     </li>
      <li class="nav-item">
+     <% if(email==null){%>
       <a class="nav-link" href="Longin.jsp">로그인</a>
+      <%} else{ %>
+      <a class="nav-link" href="logout.jsp">로그아웃</a>
+      
+      <% }%>
     </li>
   </ul>
   <form class="form-inline ml-auto" action="search.jsp">

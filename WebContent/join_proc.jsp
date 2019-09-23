@@ -24,14 +24,26 @@
 		DataSource ds = (DataSource)init.lookup("java:comp/env/jdbc/kndb");
 		conn = ds.getConnection();
 		
-		String sql = "INSERT INTO users (email, password, name ,phone, radio) VALUES (?,?,?,?,? ;";
+		String sql = "INSERT INTO users (email, pw, name, phone, grade) VALUES (?, ?, ?, ?, ?)";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, email);
 		pstmt.setString(2, password);
 		pstmt.setString(3, name);
 		pstmt.setString(4, phone);
 		pstmt.setString(5, radio);
-		pstmt.executeUpdate();
+		int ret= pstmt.executeUpdate();
+		
+		 // System.out.println("insert 쿼리 후: "+ret);
+	
+		out.println("<script>");
+		if(ret==1){
+			out.println("alert('정삭적으로 처리 되었습다!');");	
+			out.println("location.href='Longin.jsp'");
+		}else{
+			out.println("alert('시스템 오류!');");
+		}
+		out.println("</script>");
+		
 		
 		connect = true;
 		conn.close();
@@ -40,12 +52,13 @@
 		e.printStackTrace();
 	}	
 		
-	if (connect == true) {	
-		System.out.println("연결되었습니다.");
-		out.println(1);
-	} else {	
-		System.out.println("연결실패.");
-		out.println(0);
-	}	
+//	if (connect == true) {	
+	//	System.out.println("연결되었습니다.");
+	//	out.println(1);
+		
+//	} else {	
+	//	System.out.println("연결실패.");
+	//	out.println(0);
+//	}	
     
 %>

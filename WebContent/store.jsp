@@ -17,7 +17,7 @@
 
 
 <div class="container">
-  <h2>맛집 입력</h2>
+  <h2>입력 하기</h2>
   <form action="sumbit2.jsp">
     <div class="form-group">
       <label for="name">가게이름</label>
@@ -38,7 +38,7 @@
       <input type="time" class="form-control" id="time" placeholder="영업시간 입력" name="time">
     </div>
    
-    <button type="submit" class="btn btn-primary">입력하기</button>
+    <button type="submit" class="btn btn-primary">추가하기</button>
   </form>
 </div>
 

@@ -11,7 +11,8 @@
 pageEncoding="UTF-8"%>			
 			
 <%			
-			
+
+
 //위 데이터를 데이터 베이스에 넣기			
 Connection conn = null;			
 Boolean connect = false;			
@@ -77,7 +78,6 @@ System.out.println(vo.getMenu());
 </head>			
 <body>			
 		<jsp:include page="top.jsp" flush="false"/>
-
 	
 <div class="container">			
 <h2>맛집 리스트</h2>			
