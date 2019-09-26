@@ -1,17 +1,19 @@
+<%@page import="food22.USERVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
     <% 
     // 세션 체크 (불러오기)
-   String email = (String)session.getAttribute("email");
-    System.out.println(email);
+  // String email = (String)session.getAttribute("email");
+    USERVO vo =(USERVO)session.getAttribute("user"); 
+//    System.out.println(email);
     
-    if(email !=null){
-    	System.out.println("여기 있어요");
+  //  if(email !=null){
+    //	System.out.println("여기 있어요");
     	
-    }else{
-    	System.out.println("여기 없어요");
-    }
+  //  }else{
+    //	System.out.println("여기 없어요");
+   // }
     %>
 <!DOCTYPE html>
 <html>
@@ -33,7 +35,7 @@
 <ul class="navbar-nav">
 
 <li class="nav-item">
-  <% if(email!=null){%>
+  <% if(vo !=null && vo.getGrade() >9){%>
       <a class="nav-link" href="store.jsp">맛집 추가</a>
       <%} %>
     </li>
@@ -41,7 +43,7 @@
       <a class="nav-link" href="p2.jsp">전체 맛집</a>
     </li>
     <li class="nav-item">
-    <% if(email!=null){%>
+    <% if(vo!=null){%>
  <a class="nav-link" href="fa.jsp">맛집 추천</a>      
       <%} else{ %>
       <a class="nav-link" href="Longin.jsp">맛집 추천</a>
@@ -49,7 +51,7 @@
       
     </li>
      <li class="nav-item">
-     <% if(email==null){%>
+     <% if(vo==null){%>
       <a class="nav-link" href="Longin.jsp">로그인</a>
       <%} else{ %>
       <a class="nav-link" href="logout.jsp">로그아웃</a>
