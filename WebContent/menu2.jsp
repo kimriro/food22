@@ -111,10 +111,18 @@ $(document).ready(function(){
 	 });
 	
 });
+
 function modalClose() {
 // 	location.reload();
 	history.back();
 // 	$('#myModal').hide();
+}
+
+function show_modal() {
+	$('#myModal').show();
+}
+function close_modal() {
+	$('#myModal').hide();
 }
 </script>
 
@@ -129,6 +137,7 @@ function modalClose() {
 		<th>메뉴이름</th>
         <th>가격</th> 
         <th>평가하기</th> 
+        <th> </th>
       </tr>
     </thead>
     <tbody>
@@ -144,7 +153,11 @@ function modalClose() {
 			  <span class="starR on">5</span>
 			  <button type="button" class="btn btn-danger" id="star">확인</button>
 			</div> 
-			
+			</td>
+			<td>
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                                                 리뷰 작성
+            </button>
         </td>
       </tr>      
     </tbody>
@@ -152,9 +165,34 @@ function modalClose() {
   <% if (vo.getImg() == null) { %>
   	<p class="text-center"> 이미지가 없습니다. </p>
   <% } else { %>
-  	<img src="<%=vo.getImg() %>" width="640" height="480"  class="rounded mx-auto d-block">
-  <% } %>
+  <img src="<%=vo.getImg() %>" width="380" height="300" style="float: left" class="rounded mx-auto d-block">		
+<%} %>		
+<p class="mx-auto">리뷰 리스트</p>	
 </div>
-																									
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">리뷰 작성</h4>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+		<div class="form-group">
+		<label for= "comment"></label>
+		<textarea class= "form-control" rows="2" id="comment" name= "text"></textarea>
+		</div>
+        </div>
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="submit">등록하기</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>																									
 </body>
 </html>
