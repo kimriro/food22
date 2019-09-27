@@ -1,3 +1,4 @@
+<%@page import="food22.USERVO"%>
 <%@page import="food22.MENUVO"%>
 <%@page import="food22.STOREVO"%>
 <%@page import="java.util.ArrayList"%>
@@ -14,11 +15,13 @@
 <%
 request.setCharacterEncoding("utf-8");  // 한글처리
 String m_name = request.getParameter("m_name");  // 메뉴이름
+// 리뷰를 쓰기 위해 사용자 정보를 받아와야함
+USERVO uvo = (USERVO)session.getAttribute("user");
 // System.out.println(ob);
 //위 데이터를 데이터 베이스에 넣기
 Connection conn = null;			
 Boolean connect = false;
-MENUVO vo = new MENUVO();
+MENUVO mvo = new MENUVO();
 	
 try {	
 	Context init = new InitialContext();
@@ -31,10 +34,10 @@ try {
 	ResultSet rs = pstmt.executeQuery();
 	
 	if (rs.next()) {
-		vo.setId(rs.getInt("id"));
-		vo.setName(rs.getString("name"));
-		vo.setPrice(rs.getString("price"));
-		vo.setImg(rs.getString("img"));
+		mvo.setId(rs.getInt("id"));
+		mvo.setName(rs.getString("name"));
+		mvo.setPrice(rs.getString("price"));
+		mvo.setImg(rs.getString("img"));
 	}
 	
 	connect = true;
@@ -73,6 +76,7 @@ if (connect == true) {
 	  cursor: pointer;
 	}
 	.starR.on{background-position:0 0;}
+	
 </style>
 
 <script>
@@ -110,19 +114,43 @@ $(document).ready(function(){
 		    });
 	 });
 	
+	 $("#submit").click(function(){
+		    $.post("review_proc.jsp",
+		    {
+		      review: $('#comment').val(),
+		      m_id: $('#m_id').val(),
+		      u_id: $('#u_id').val() 
+		    },
+		    function(data,status){
+// 		      alert("Data: " + data + "\nStatus: " + status);
+				if (data == 1) {
+					alert("감사합니다.");
+		    	} else {
+					alert("오류 났어요. 관리자에게 문의!")
+				}
+		      
+		      	modalClose();	
+		    });
+	  });
+	
 });
-
 function modalClose() {
-// 	location.reload();
-	history.back();
+ 	location.reload();
+// 	history.back();
 // 	$('#myModal').hide();
 }
-
-function show_modal() {
-	$('#myModal').show();
-}
-function close_modal() {
-	$('#myModal').hide();
+$(function() {
+    $('#comment').keyup(function (e){
+        var content = $(this).val();
+        $(this).height(((content.split('\n').length + 1) * 1.5) + 'em');
+        $('#counter').html(content.length + '/50');
+    });
+    $('#comment').keyup();
+});
+function send_Longin() {
+	alert("리뷰를 작성을 할려면 로그인 하세요!");
+	location.href="Longin.jsp";
+	
 }
 </script>
 
@@ -136,14 +164,14 @@ function close_modal() {
       <tr>
 		<th>메뉴이름</th>
         <th>가격</th> 
-        <th>평가하기</th> 
-        <th> </th>
+        <th>평가하기</th>
+        <th></th>  
       </tr>
     </thead>
     <tbody>
       <tr class="table-dark text-dark">
-        <td id="m_menuname"><%=vo.getName() %></td>
-        <td><%=vo.getPrice() %></td>
+        <td id="m_menuname"><%=mvo.getName() %></td>
+        <td><%=mvo.getPrice() %></td>
         <td>
         	<div class="starRev">
 			  <span class="starR on">1</span>
@@ -153,38 +181,51 @@ function close_modal() {
 			  <span class="starR on">5</span>
 			  <button type="button" class="btn btn-danger" id="star">확인</button>
 			</div> 
-			</td>
-			<td>
-			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-                                                 리뷰 작성
-            </button>
+        </td>
+        <td>
+        	<% if (uvo == null) { %>
+        		<button type="button" class="btn btn-primary" onclick="send_Longin()">
+		  			리뷰쓰기
+				</button> 
+        	 <% } else { %>
+		        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+		  			리뷰쓰기
+				</button>
+			<% } %>
         </td>
       </tr>      
     </tbody>
   </table>
-  <% if (vo.getImg() == null) { %>
-  	<p class="text-center"> 이미지가 없습니다. </p>
-  <% } else { %>
-  <img src="<%=vo.getImg() %>" width="380" height="300" style="float: left" class="rounded mx-auto d-block">		
-<%} %>		
-<p class="mx-auto">리뷰 리스트</p>	
-</div>
-<div class="modal" id="myModal">
+  	<% if (mvo.getImg() == null) { %>
+  		<p class="text-center"> 이미지가 없습니다. </p>
+  	<% } else { %>
+		<img src="<%=mvo.getImg() %>" width="320" height="240" style="float: left" class="rounded mx-auto d-block">		
+	<%} %>		
+	<p class="mx-auto">리뷰 리스트가 밑으로 쫙 ~~</p>		
+
+ <!-- The Modal 시작 -->
+  <div class="modal" id="myModal">
     <div class="modal-dialog">
       <div class="modal-content">
       
         <!-- Modal Header -->
         <div class="modal-header">
-          <h4 class="modal-title">리뷰 작성</h4>
+          <h4 class="modal-title">리뷰쓰기</h4>
         </div>
         
         <!-- Modal body -->
         <div class="modal-body">
-		<div class="form-group">
-		<label for= "comment"></label>
-		<textarea class= "form-control" rows="2" id="comment" name= "text"></textarea>
-		</div>
+			<div class="form-group">
+	      		<label for="comment"></label>
+	      		<textarea class="form-control" rows="2"  maxlength="50" id="comment" name="text"></textarea>
+	      		<input type="hidden" id="m_id" value="<%=mvo.getId() %>">
+	      		<% if (uvo != null) { %>
+	      			<input type="hidden" id="u_id" value="<%=uvo.getId() %>">
+	      		<% } %>
+	      		<span id="counter" class="text-right">###</span>
+	    	</div>	   
         </div>
+        
         <!-- Modal footer -->
         <div class="modal-footer">
           <button type="button" class="btn btn-primary" id="submit">등록하기</button>
@@ -193,6 +234,11 @@ function close_modal() {
         
       </div>
     </div>
-  </div>																									
+  </div>
+<!-- 모달 끝 -->	
+
+</div>
+
+																					
 </body>
 </html>

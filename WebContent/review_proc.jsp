@@ -7,24 +7,29 @@
     pageEncoding="UTF-8"%>
 <%
 	request.setCharacterEncoding("utf-8"); //
-	String menu = request.getParameter("menu");
-	String star = request.getParameter("star");
+	String review = request.getParameter("review");
+	String m_id = request.getParameter("m_id");
+	String u_id = request.getParameter("u_id");
+	
 	
 // 	out.println(menu + " 에 " + "별점 " + star + " 점을 줬다.");
 	
 	// 점수를 DB에 저장
 	Connection conn = null;			
 	Boolean connect = false;
+	
+	
 		
 	try {	
 		Context init = new InitialContext();
 		DataSource ds = (DataSource)init.lookup("java:comp/env/jdbc/kndb");
 		conn = ds.getConnection();
 		
-		String sql = "INSERT INTO review (score, m_id) VALUES (?, (SELECT id FROM menu WHERE NAME = ?));";
+		String sql = "INSERT INTO review (review, m_id, u_id) VALUES (?,?,?)";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, star);
-		pstmt.setString(2, menu);
+		pstmt.setString(1, review);
+		pstmt.setString(2, m_id);
+		pstmt.setString(3, u_id);
 		pstmt.executeUpdate();
 		
 		connect = true;
@@ -32,14 +37,14 @@
 	} catch (Exception e) {	
 		connect = false;
 		e.printStackTrace();
+
 	}	
-		
 	if (connect == true) {	
-		System.out.println("연결되었습니다.");
+	//	System.out.println("연결되었습니다.");
 		out.println(1);
 	} else {	
-		System.out.println("연결실패.");
+	//	System.out.println("연결실패.");
 		out.println(0);
-	}	
-    
+	}		
+	
 %>
