@@ -1,3 +1,4 @@
+<%@page import="food22.USERVO"%>
 <%@page import="food22.MENUVO"%>
 <%@page import="food22.STOREVO"%>
 <%@page import="java.util.ArrayList"%>
@@ -13,6 +14,8 @@
 
 <%
 request.setCharacterEncoding("utf-8");  // 한글처리
+
+USERVO uvo = (USERVO)session.getAttribute("user");
 String s_id = request.getParameter("s_id");   // DB에서 메뉴를 불러 오기 위한 가게 ID
 String s_name = request.getParameter("s_name");  // 가게이름
 // String ob = request.getParameter("orderby");  // 오름 차순
@@ -77,10 +80,32 @@ if (connect == true) {
 	  cursor: pointer;
 	}
 	.starR.on{background-position:0 0;}
+	
+	
+span.star-prototype, span.star-prototype > * {
+    height: 16px; 
+    background: url(http://i.imgur.com/YsyS5y8.png) 0 -16px repeat-x;
+    width: 80px;
+    display: inline-block;
+}
+ 
+span.star-prototype > * {
+    background-position: 0 0;
+    max-width:80px; 
+}
 </style>
+
 
 <script>
 $(document).ready(function(){
+	$.fn.generateStars = function() {
+	    return this.each(function(i,e){$(e).html($('<span/>').width($(e).text()*16));});
+	};
+
+	// 숫자 평점을 별로 변환하도록 호출하는 함수
+	$('.star-prototype').generateStars();
+	
+	
 	$('#star').hide(); // 별점 확인 버튼 숨기기
 	var score = 5;	//별점 초기값
 	// 별 클릭 할 떄 마다 별점이 바뀜
@@ -160,16 +185,30 @@ function modalClose() {
     </thead>
     <tbody>
     <%for (MENUVO vo : list) { %>
+    
       <tr class="table-dark text-dark">
         <td id="m_menuname"><a href="menu2.jsp?m_name=<%=vo.getName() %>"><%=vo.getName() %></a></td>
         <td><%=vo.getPrice() %></td>
-        <td><%=vo.getStar_avg() %></td>
+        <td><span class="star-prototype">
+        <% 
+        String star_avg = vo.getStar_avg();
+        if(star_avg.length() > 3){
+        	star_avg = star_avg.substring(0, 3);
+        	
+        }
+        %>
+        <%=star_avg %>
+        </span> 
+        (<%=star_avg %>)
+        </td>
+        
       </tr>      
   	<% } %>
     </tbody>
   </table>
+  <%if(uvo != null){ %>
   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">메뉴 추가하기</button>
-  
+  <%} %>
 </div>
 																	
 										

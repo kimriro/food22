@@ -1,3 +1,4 @@
+  
 <%@page import="food22.USERVO"%>
 <%@page import="food22.MENUVO"%>
 <%@page import="food22.STOREVO"%>
@@ -17,11 +18,19 @@ request.setCharacterEncoding("utf-8");  // 한글처리
 String m_name = request.getParameter("m_name");  // 메뉴이름
 // 리뷰를 쓰기 위해 사용자 정보를 받아와야함
 USERVO uvo = (USERVO)session.getAttribute("user");
+
+//리뷰를 담을 그릇을 생성(리스트)
+ArrayList<String> reviewList = new ArrayList<>();
+
+
+
 // System.out.println(ob);
 //위 데이터를 데이터 베이스에 넣기
 Connection conn = null;			
 Boolean connect = false;
 MENUVO mvo = new MENUVO();
+
+
 	
 try {	
 	Context init = new InitialContext();
@@ -38,6 +47,17 @@ try {
 		mvo.setName(rs.getString("name"));
 		mvo.setPrice(rs.getString("price"));
 		mvo.setImg(rs.getString("img"));
+	}
+
+	
+	sql = "SELECT * FROM review WHERE m_id = ?";
+	
+	pstmt = conn.prepareStatement(sql);
+	pstmt.setInt(1, mvo.getId());
+	rs = pstmt.executeQuery();
+	
+	while (rs.next()) {
+		reviewList.add(rs.getString("review"));
 	}
 	
 	connect = true;
@@ -98,8 +118,10 @@ $(document).ready(function(){
 	$("#star").click(function(){
 		    $.post("star_proc.jsp",
 		    {
-		      menu: $('#m_menuname').text(),
-		      star: score
+		      
+		      star: score,
+		      m_id: $('#m_id').val(),
+		      u_id: $('#u_id').val() 
 		    },
 		    function(data,status){
 		      //alert("Data: " + data + "\nStatus: " + status);
@@ -147,9 +169,9 @@ $(function() {
     });
     $('#comment').keyup();
 });
-function send_Longin() {
+function send_login() {
 	alert("리뷰를 작성을 할려면 로그인 하세요!");
-	location.href="Longin.jsp";
+	location.href="login.jsp";
 	
 }
 </script>
@@ -179,12 +201,16 @@ function send_Longin() {
 			  <span class="starR on">3</span>
 			  <span class="starR on">4</span>
 			  <span class="starR on">5</span>
+			  <% if(uvo == null){%>
+			  <button type="button" class="btn btn-danger" onclick="send_login()">확인</button>
+			  <%}else{ %>
 			  <button type="button" class="btn btn-danger" id="star">확인</button>
+		 <%}%>
 			</div> 
         </td>
         <td>
         	<% if (uvo == null) { %>
-        		<button type="button" class="btn btn-primary" onclick="send_Longin()">
+        		<button type="button" class="btn btn-primary" onclick="send_login()">
 		  			리뷰쓰기
 				</button> 
         	 <% } else { %>
@@ -201,7 +227,11 @@ function send_Longin() {
   	<% } else { %>
 		<img src="<%=mvo.getImg() %>" width="320" height="240" style="float: left" class="rounded mx-auto d-block">		
 	<%} %>		
-	<p class="mx-auto">리뷰 리스트가 밑으로 쫙 ~~</p>		
+	<h4 class="mx-auto">리뷰 리스트</h4>
+	
+	<%for (String rStr : reviewList){%>
+	<p class="mx-auto"><%=rStr %></p>
+	<%} %>		
 
  <!-- The Modal 시작 -->
   <div class="modal" id="myModal">

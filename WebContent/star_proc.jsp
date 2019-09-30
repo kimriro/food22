@@ -7,8 +7,9 @@
     pageEncoding="UTF-8"%>
 <%
 	request.setCharacterEncoding("utf-8"); //
-	String menu = request.getParameter("menu");
 	String star = request.getParameter("star");
+	String m_id = request.getParameter("m_id");
+	String u_id = request.getParameter("u_id");
 	
 // 	out.println(menu + " 에 " + "별점 " + star + " 점을 줬다.");
 	
@@ -21,10 +22,20 @@
 		DataSource ds = (DataSource)init.lookup("java:comp/env/jdbc/kndb");
 		conn = ds.getConnection();
 		
-		String sql = "INSERT INTO review (score, m_id) VALUES (?, (SELECT id FROM menu WHERE NAME = ?));";
+		//별점 넣기 쿼리
+		String sql = "INSERT INTO star (score, m_id, u_id) VALUES (?,?,?)"; 
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, star);
-		pstmt.setString(2, menu);
+		pstmt.setString(2, m_id);
+		pstmt.setString(3, u_id);
+		pstmt.executeUpdate();
+		
+		//별점 평균을 업데이트
+
+		 sql = "UPDATE menu SET star_avg = CAST((SELECT AVG(score) FROM star WHERE m_id = ?) AS CHAR(10)) WHERE id = ?"; 
+		 pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, m_id);
+		pstmt.setString(2, m_id);
 		pstmt.executeUpdate();
 		
 		connect = true;
