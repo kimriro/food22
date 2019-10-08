@@ -59,7 +59,7 @@
       <% }%>
     </li>
   </ul>
-  <form class="form-inline ml-auto" action="search.jsp">
+  <form class="form-inline ml-auto" action="result.jsp">
     <input class="form-control mr-sm-2" type="text" name="search" placeholder="맛집 찾기">
     <button class="btn btn-success" type="submit">Search</button>
   </form>
