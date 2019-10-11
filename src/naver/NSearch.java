@@ -9,9 +9,9 @@ import java.net.URLEncoder;
 public class NSearch {
 
 	public static String getDate(String search) {
-		String retStr = null; //결과 리턴 변수 
-		 String clientId = "";//애플리케이션 클라이언트 아이디값";
-	     String clientSecret = "";//애플리케이션 클라이언트 시크릿값";
+		String retStr = null; // 결과 리턴 변수
+	     String clientId = "cJGEBL6TBCYzCT3UA7GR";//애플리케이션 클라이언트 아이디값";
+	     String clientSecret = "EllY7OeFrx";//애플리케이션 클라이언트 시크릿값";
 	     try {
 	         String text = URLEncoder.encode(search, "UTF-8");
 	         String apiURL = "https://openapi.naver.com/v1/search/blog?query="+ text; // json 결과
@@ -34,11 +34,12 @@ public class NSearch {
 	             response.append(inputLine);
 	         }
 	         br.close();
-	//         System.out.println(response.toString());
+//	         System.out.println(response.toString());
 	         retStr = response.toString();
 	     } catch (Exception e) {
 	         System.out.println(e);
 	     }
+
 	     return retStr;
 	}
 }

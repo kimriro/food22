@@ -35,7 +35,7 @@
     </div>
     <div class="form-group">
       <label for="time">영업 시간</label>
-      <input type="time" class="form-control" id="time" placeholder="영업시간 입력" name="time">
+      <input type="text" class="form-control" id="time" placeholder="영업시간 입력" name="time">
     </div>
    
     <button type="submit" class="btn btn-primary">추가하기</button>

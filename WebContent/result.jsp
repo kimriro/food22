@@ -13,7 +13,7 @@ String search = request.getParameter("search");
 <!DOCTYPE html>
 <html>
 <head>
-  <title>맛집 리스트</title>
+  <title>맛집 검색</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -25,7 +25,7 @@ $(document).ready(function(){
 	var html = "";
 	$.getJSON("search.jsp?search=<%=search %>", function(result){
 	   $.each(result.items, function(i, field){
-	      html += "<a href='" + field.link + "' target='_blank'>" + field.title + "</a><br>" ;
+	      html += "<a href='" + field.link + "' target='_blank'>" + field.title +"<img src='" + field.img + "'><br></a>";
 	   });
        $('#result').html(html);
 	});
@@ -39,8 +39,6 @@ $(document).ready(function(){
   <h2>검색 결과</h2>
   <div id="result"></div>
 </div>
-
-
 </body>
 </html>
 
